@@ -4,6 +4,7 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton';
 var cssConstants = require('../config/cssConstants').cssConstants;
 import * as Colors from 'material-ui/styles/colors';
+import SelectCurrency from '../components/SelectCurrency'
 const ButtonStyle = {
   marginTop: 12,
   fontWeight: 'bold'
@@ -41,6 +42,7 @@ var expenseInput = React.createClass({
                      rows={ 3 }
                      style={ TextFieldStyle } />
           <br/>
+          <SelectCurrency/>
           <RaisedButton
                         backgroundColor={ Colors.blue800 }
                         label="Save Expense"

@@ -4,14 +4,16 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var hashHistory = ReactRouter.hashHistory;
 var IndexRoute = ReactRouter.IndexRoute;
-import Home from '../components/Home'
+import UserDetails from '../containers/UserDetails'
 import App from '../components/App'
+import Main from '../components/Main'
 var Nav = require('../components/Nav');
 var routes = (
 <Router history={ hashHistory }>
   <Route
          path="/"
-         component={ Home }>
+         component={ Main }>
+    <IndexRoute component={ UserDetails } />
     <Route
            path="/app/:currencyUnit"
            component={ App } />

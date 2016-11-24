@@ -6,9 +6,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 require('flexboxgrid');
 injectTapEventPlugin();
 var routes = require('./config/routes');
-var PouchDB = require('pouchdb-browser');
-var db = new PouchDB('my_database');
-var remoteCouch = false;
 ReactDOM.render(
   routes,
   document.getElementById('root')

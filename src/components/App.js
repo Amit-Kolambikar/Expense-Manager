@@ -3,8 +3,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 var Nav = require('../components/Nav');
 var ExpenseInput = require('../components/ExpenseInput');
 import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import * as colors from 'material-ui/styles/colors';
+import * as Colors from 'material-ui/styles/colors';
 import { fade } from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
 var cssConstants = require('../config/cssConstants').cssConstants;
@@ -12,20 +13,20 @@ var cssConstants = require('../config/cssConstants').cssConstants;
 const muiTheme = getMuiTheme({
   fontFamily: 'Open Sans, sans-serif',
   palette: {
-    primary1Color: colors.blue500,
-    primary2Color: colors.blue700,
-    primary3Color: colors.grey400,
-    accent1Color: colors.pinkA200,
-    accent2Color: colors.grey100,
-    accent3Color: colors.grey500,
-    textColor: colors.darkBlack,
-    alternateTextColor: colors.white,
-    canvasColor: colors.white,
-    borderColor: colors.grey300,
-    disabledColor: fade(colors.darkBlack, 0.3),
-    pickerHeaderColor: colors.blue500,
-    clockCircleColor: fade(colors.darkBlack, 0.07),
-    shadowColor: colors.fullBlack
+    primary1Color: Colors.blue500,
+    primary2Color: Colors.blue700,
+    primary3Color: Colors.grey400,
+    accent1Color: Colors.pinkA200,
+    accent2Color: Colors.grey100,
+    accent3Color: Colors.grey500,
+    textColor: Colors.darkBlack,
+    alternateTextColor: Colors.white,
+    canvasColor: Colors.white,
+    borderColor: Colors.grey300,
+    disabledColor: fade(Colors.darkBlack, 0.3),
+    pickerHeaderColor: Colors.blue500,
+    clockCircleColor: fade(Colors.darkBlack, 0.07),
+    shadowColor: Colors.fullBlack
   }
 });
 

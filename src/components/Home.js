@@ -8,6 +8,7 @@ import { fade } from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
 var cssConstants = require('../config/cssConstants').cssConstants
 import SelectCurrency from '../components/SelectCurrency';
+import RaisedButton from 'material-ui/RaisedButton';
 import atat from '../../public/img/1479958235_at-at.png'
 const muiTheme = getMuiTheme({
   fontFamily: 'Open Sans, sans-serif',
@@ -47,35 +48,43 @@ const ButtonStyle = {
   margin: '36px auto',
   display: 'block',
   width: '17em',
-  fontWeight: 'bold'
+  fontWeight: 'bold',
+  top: 60,
+  position: 'relative'
 };
 
 const atatStyle = {
   'width': '13em',
-  margin: '4em auto',
+  margin: '4em auto 1em auto',
   display: 'block',
   'left': '-22px',
   position: 'relative'
 }
-export default class Home extends React.Component {
-  render() {
-    return (
-      <MuiThemeProvider muiTheme={ muiTheme }>
-        <Paper
-               style={ style }
-               zDepth={ 4 }
-               rounded={ false }>
-          <AppBar
-                  title="Select your Currency"
-                  iconClassNameRight="muidocs - icon - navigation - expand - more"
-                  style={ { 'textAlign': 'center' } } />
-          <img
-               src={ atat }
-               style={ atatStyle } />
-          <SelectCurrency/>
-        </Paper>
-      </MuiThemeProvider>
-    )
-  }
-}
-// module.exports = Home;
+
+const Home = props => {
+  return (
+    <MuiThemeProvider muiTheme={ muiTheme }>
+      <Paper
+             style={ style }
+             zDepth={ 4 }
+             rounded={ false }>
+        <AppBar
+                title="Select your Currency"
+                iconClassNameRight="muidocs - icon - navigation - expand - more"
+                style={ { 'textAlign': 'center' } } />
+        <img
+             src={ atat }
+             style={ atatStyle } />
+        <SelectCurrency/>
+        <RaisedButton
+                      backgroundColor={ Colors.blue800 }
+                      label="Proceed"
+                      labelColor={ Colors.white }
+                      style={ ButtonStyle }
+                      onClick={ props.onProceedClick } />
+      </Paper>
+    </MuiThemeProvider>
+  )
+};
+
+module.exports = Home;

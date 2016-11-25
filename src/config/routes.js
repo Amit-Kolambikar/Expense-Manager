@@ -15,7 +15,7 @@ var routes = (
          component={ Main }>
     <IndexRoute component={ UserDetails } />
     <Route
-           path="/app/:currencyUnit"
+           path="/app"
            component={ App } />
   </Route>
 </Router>

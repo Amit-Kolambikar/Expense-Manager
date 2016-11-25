@@ -75,7 +75,7 @@ const Home = props => {
         <img
              src={ atat }
              style={ atatStyle } />
-        <SelectCurrency/>
+        <SelectCurrency props={ props } />
         <RaisedButton
                       backgroundColor={ Colors.blue800 }
                       label="Proceed"
@@ -86,5 +86,4 @@ const Home = props => {
     </MuiThemeProvider>
   )
 };
-
-module.exports = Home;
+export default Home;

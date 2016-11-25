@@ -11,39 +11,58 @@ const selectStyle = {
   left: 0,
   right: 0
 }
-export default class DropDownMenuLongMenuExample extends Component {
+
+class SelectCurrency extends React.Component {
   state = {
-    value: 1,
+    value: items[0],
   };
+
+  // props = this.props.props
   handleChange = (event, index, value) => {
     this.setState({
       value
-    })
-  };
+    });
+    this.props.props.dropdownChange(value);
 
+  }
+  componentWillMount() {
+    if (this.props.CurrencyUnit) {
+      this.setState({
+        value: this.props.CurrencyUnit
+      })
+    }
+    this.state.value = this.props.CurrencyUnit
+  // this.refs.SelectFieldCurrency.value = this.props.CurrencyUnit
+  }
   render() {
     return (
-      <SelectField
-                   value={ this.state.value }
-                   onChange={ this.handleChange }
-                   maxHeight={ 300 }
-                   style={ selectStyle }>
-        <MenuItem
-                  value={ 1 }
-                  primaryText={ items[0] } />
-        <MenuItem
-                  value={ 2 }
-                  primaryText={ items[1] } />
-        <MenuItem
-                  value={ 3 }
-                  primaryText={ items[2] } />
-        <MenuItem
-                  value={ 4 }
-                  primaryText={ items[3] } />
-        <MenuItem
-                  value={ 5 }
-                  primaryText={ items[4] } />
-      </SelectField>
-      );
+      <div>
+        <SelectField
+                     value={ this.state.value }
+                     onChange={ this.handleChange }
+                     maxHeight={ 300 }
+                     style={ selectStyle }
+                     {...this.props.disabled ? { disabled:
+          true } : { disabled: false }}
+                     ref="SelectFieldCurrency">
+          <MenuItem
+                    value={ items[0] }
+                    primaryText={ items[0] } />
+          <MenuItem
+                    value={ items[1] }
+                    primaryText={ items[1] } />
+          <MenuItem
+                    value={ items[2] }
+                    primaryText={ items[2] } />
+          <MenuItem
+                    value={ items[3] }
+                    primaryText={ items[3] } />
+          <MenuItem
+                    value={ items[4] }
+                    primaryText={ items[4] } />
+        </SelectField>
+      </div>);
   }
 }
+
+export default SelectCurrency;

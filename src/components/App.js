@@ -1,7 +1,7 @@
 import React from 'react'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 var Nav = require('../components/Nav');
-import ExpenseInput from '../components/ExpenseInput';
+import SaveExpenseEntry from '../containers/SaveExpenseEntry'
 import Paper from 'material-ui/Paper';
 import RaisedButton from 'material-ui/RaisedButton';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -49,13 +49,12 @@ export default class App extends React.Component {
     return (
       <MuiThemeProvider muiTheme={ muiTheme }>
         <div>
-          <h1>App</h1>
           <Paper
                  style={ style }
                  zDepth={ 4 }
                  rounded={ false }>
             <Nav/>
-            <ExpenseInput />
+            <SaveExpenseEntry />
           </Paper>
         </div>
       </MuiThemeProvider>

@@ -6,7 +6,9 @@ import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
 import PersonAdd from 'material-ui/svg-icons/social/person-add';
 import ContentLink from 'material-ui/svg-icons/content/link';
 import Divider from 'material-ui/Divider';
-import ContentCopy from 'material-ui/svg-icons/content/content-copy';
+import ShowChart from 'material-ui/svg-icons/editor/insert-chart';
+import FiberNew from 'material-ui/svg-icons/av/fiber-new'
+import ViewList from 'material-ui/svg-icons/action/view-list'
 import Download from 'material-ui/svg-icons/file/file-download';
 import Delete from 'material-ui/svg-icons/action/delete';
 import FontIcon from 'material-ui/FontIcon';
@@ -15,7 +17,7 @@ const style = {
   paper: {
     display: 'inline-block',
     float: 'left',
-    margin: '0px 32px 16px 0',
+    margin: '17px 32px 16px 0',
     boxShadow: 'none',
     width: cssConstants.navWidth
   },
@@ -30,23 +32,17 @@ const Nav = () => (
   <Paper style={ style.paper }>
     <Menu>
       <MenuItem
-                primaryText="Preview"
-                leftIcon={ <RemoveRedEye /> } />
+                primaryText="New Expense"
+                leftIcon={ <FiberNew /> } />
       <MenuItem
-                primaryText="Share"
-                leftIcon={ <PersonAdd /> } />
-      <MenuItem
-                primaryText="Get links"
-                leftIcon={ <ContentLink /> } />
-      <MenuItem
-                primaryText="Make a copy"
-                leftIcon={ <ContentCopy /> } />
+                primaryText="Show All "
+                leftIcon={ <ViewList /> } />
       <MenuItem
                 primaryText="Download"
                 leftIcon={ <Download /> } />
       <MenuItem
-                primaryText="Remove"
-                leftIcon={ <Delete /> } />
+                primaryText="View Graph"
+                leftIcon={ <ShowChart /> } />
     </Menu>
   </Paper>
 </div>

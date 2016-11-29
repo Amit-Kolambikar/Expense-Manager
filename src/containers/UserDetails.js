@@ -5,7 +5,6 @@ var ExpensesDatabase = new PouchDB('ExpensesDatabase');
 import SelectCurrency from '../components/SelectCurrency';
 var remoteCouch = false;
 
-
 export default class UserDetails extends React.Component {
   constructor(props, context) {
     super(props);
@@ -19,7 +18,8 @@ export default class UserDetails extends React.Component {
       return ExpensesDatabase.put({
         _id: 'UserDetails',
         _rev: doc._rev,
-        currencyUnit: value
+        currencyUnit: value,
+        currentExpenseId: doc.currentExpenseId
       });
     }).then(function(response) {
       // handle response
@@ -29,7 +29,8 @@ export default class UserDetails extends React.Component {
       if (err.status == 404) {
         ExpensesDatabase.put({
           _id: 'UserDetails',
-          currencyUnit: value
+          currencyUnit: value,
+          currentExpenseId: 1
         }).then(function(response) {
           // handle response
           // this.RenderApp

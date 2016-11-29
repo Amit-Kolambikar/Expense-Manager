@@ -10,7 +10,9 @@ const ExpenseDatePicker = () => (
   <DatePicker
               hintText="Select Date"
               mode="landscape"
-              autoOk={ true } />
+              autoOk={ true }
+              required
+              name="date" />
 </div>
 );
 

@@ -2,7 +2,8 @@ import React from 'react';
 import ExpenseInput from '../components/ExpenseInput';
 import Home from '../components/Home'
 var PouchDB = require('pouchdb-browser');
-var ExpensesDatabase = new PouchDB('ExpensesDatabase');
+window.PouchDB = PouchDB;
+var ExpensesDatabase = PouchDB('ExpensesDatabase');
 import SelectCurrency from '../components/SelectCurrency';
 var remoteCouch = false;
 
@@ -39,7 +40,6 @@ export default class SaveExpenseEntry extends React.Component {
         this.clearForm();
         this.showAllExpenses();
       }.bind(this)).catch(function(err) {
-        console.log(err);
         if (err.status == 404) {
           // new expense entry put
           ExpensesDatabase.put({
@@ -52,14 +52,29 @@ export default class SaveExpenseEntry extends React.Component {
           // handle response
           // this.RenderApp
           this.clearForm();
+          this.currentExpenseId = this.currentExpenseId + 1;
+          ExpensesDatabase.get('UserDetails').then(function(doc) {
+            return ExpensesDatabase.put({
+              _id: 'UserDetails',
+              _rev: doc._rev,
+              currencyUnit: doc.currencyUnit,
+              currentExpenseId: this.currentExpenseId
+            });
+          }.bind(this));
           this.showAllExpenses();
+
         }
       }.bind(this));
     }.bind(this));
 
   }
-  clearForm() {}
-  showAllExpenses() {}
+  clearForm() {
+    document.getElementById('expense-form').reset();
+    document.querySelectorAll('[name=date]')[0].value = "";
+  }
+  showAllExpenses() {
+    this.context.router.push('/app/all')
+  }
   render() {
     return (<ExpenseInput handleForm={ this.handleForm.bind(this) }>
             </ExpenseInput>)

@@ -9,6 +9,7 @@ import CategorySelection from '../components/categorySelection'
 // import SelectCurrency from '../components/SelectCurrency'
 var PouchDB = require('pouchdb-browser');
 var ExpensesDatabase = PouchDB('ExpensesDatabase')
+window.PouchDB = PouchDB;
 const ButtonStyle = {
   marginTop: 12,
   fontWeight: 'bold'

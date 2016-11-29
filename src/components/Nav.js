@@ -12,6 +12,7 @@ import ViewList from 'material-ui/svg-icons/action/view-list'
 import Download from 'material-ui/svg-icons/file/file-download';
 import Delete from 'material-ui/svg-icons/action/delete';
 import FontIcon from 'material-ui/FontIcon';
+import { Router, Route, Link } from 'react-router'
 var cssConstants = require('../config/cssConstants').cssConstants;
 const style = {
   paper: {
@@ -24,25 +25,29 @@ const style = {
   rightIcon: {
     textAlign: 'center',
     lineHeight: '24px',
-  },
+  }
 };
 
 const Nav = () => (
 <div>
   <Paper style={ style.paper }>
-    <Menu>
+    <Menu className="navmenu">
       <MenuItem
                 primaryText="New Expense"
-                leftIcon={ <FiberNew /> } />
+                leftIcon={ <FiberNew /> }
+                containerElement={ <Link to='/app/new' /> } />
       <MenuItem
                 primaryText="Show All "
-                leftIcon={ <ViewList /> } />
+                leftIcon={ <ViewList /> }
+                containerElement={ <Link to='/app/all' /> } />
       <MenuItem
                 primaryText="Download"
-                leftIcon={ <Download /> } />
+                leftIcon={ <Download /> }
+                containerElement={ <Link to='/app/new' /> } />
       <MenuItem
-                primaryText="View Graph"
-                leftIcon={ <ShowChart /> } />
+                primaryText="View Chart"
+                leftIcon={ <ShowChart /> }
+                containerElement={ <Link to='/app/view-chart' /> } />
     </Menu>
   </Paper>
 </div>

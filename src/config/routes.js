@@ -6,6 +6,8 @@ var hashHistory = ReactRouter.hashHistory;
 var IndexRoute = ReactRouter.IndexRoute;
 import UserDetails from '../containers/UserDetails'
 import App from '../components/App'
+import SaveExpenseEntry from '../containers/SaveExpenseEntry'
+import AllExpenses from '../containers/AllExpenses'
 import Main from '../components/Main'
 var Nav = require('../components/Nav');
 var routes = (
@@ -16,7 +18,15 @@ var routes = (
     <IndexRoute component={ UserDetails } />
     <Route
            path="/app"
-           component={ App } />
+           component={ App }>
+      <IndexRoute component={ AllExpenses } />
+      <Route
+             path="/app/all"
+             component={ AllExpenses } />
+      <Route
+             path="/app/new"
+             component={ SaveExpenseEntry } />
+    </Route>
   </Route>
 </Router>
 );

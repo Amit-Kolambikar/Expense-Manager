@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from '../components/Home'
 var PouchDB = require('pouchdb-browser');
+window.PouchDB = PouchDB;
 var ExpensesDatabase = new PouchDB('ExpensesDatabase');
 import SelectCurrency from '../components/SelectCurrency';
 var remoteCouch = false;

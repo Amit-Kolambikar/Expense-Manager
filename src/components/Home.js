@@ -36,14 +36,6 @@ const style = {
   margin: '50px auto'
 };
 
-// Basic Json
-// accounts , history, salary , monthly left,allocate-limit expenses 
-// {
-// 	id:1,
-// 	amount:22.22,
-// 	category:'Food',
-// 	date:'1994-03-17'
-// }
 const ButtonStyle = {
   margin: '36px auto',
   display: 'block',
@@ -64,25 +56,27 @@ const atatStyle = {
 const Home = props => {
   return (
     <MuiThemeProvider muiTheme={ muiTheme }>
-      <Paper
-             style={ style }
-             zDepth={ 4 }
-             rounded={ false }>
-        <AppBar
-                title="Select your Currency"
-                iconClassNameRight="muidocs - icon - navigation - expand - more"
-                style={ { 'textAlign': 'center' } } />
-        <img
-             src={ atat }
-             style={ atatStyle } />
-        <SelectCurrency props={ props } />
-        <RaisedButton
-                      backgroundColor={ Colors.blue800 }
-                      label="Proceed"
-                      labelColor={ Colors.white }
-                      style={ ButtonStyle }
-                      onClick={ props.onProceedClick } />
-      </Paper>
+      <div>
+        <Paper
+               style={ style }
+               zDepth={ 4 }
+               rounded={ false }>
+          <AppBar
+                  title="Select your Currency"
+                  iconClassNameRight="muidocs - icon - navigation - expand - more"
+                  style={ { 'textAlign': 'center' } } />
+          <img
+               src={ atat }
+               style={ atatStyle } />
+          <SelectCurrency props={ props } />
+          <RaisedButton
+                        backgroundColor={ Colors.blue800 }
+                        label="Proceed"
+                        labelColor={ Colors.white }
+                        style={ ButtonStyle }
+                        onClick={ props.onProceedClick } />
+        </Paper>
+      </div>
     </MuiThemeProvider>
   )
 };

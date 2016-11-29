@@ -304,7 +304,7 @@ button,
 html [type="button"], /* 1 */
 [type="reset"],
 [type="submit"] {
-  -webkit-appearance: button; /* 2 */
+  -webkit-appearance: none !important ;/* 2 */
 }
 
 /**
@@ -434,4 +434,16 @@ html{
 	
 }
 #root{
+}
+.navmenu a{
+  background:#fff !important;
+}
+.navmenu a:hover{
+color:rgb(21, 101, 192) !important;
+fill:rgb(21, 101, 192) !important;
+}
+.navmenu a:hover svg{
+color:rgb(21, 101, 192) !important;
+fill:rgb(21, 101, 192) !important;
+
 }

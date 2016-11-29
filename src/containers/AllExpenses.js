@@ -1,18 +1,8 @@
 import React from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
 import ShowAll from '../components/ShowAll'
-import * as Colors from 'material-ui/styles/colors';
 var PouchDB = require('pouchdb-browser');
 window.PouchDB = PouchDB;
 var remoteCouch = false;
-
-const style = {
-  margin: 12,
-};
-const styleb1 = {
-  marginLeft: 350,
-  marginTop: 15
-};
 
 export default class AllExpenses extends React.Component {
 
@@ -44,16 +34,6 @@ export default class AllExpenses extends React.Component {
       return (
         <div>
           <ShowAll ExpenseDataList={ this.state.ExpenseDataList } />
-          <RaisedButton
-                        label="Edit"
-                        backgroundColor={ Colors.blue800 }
-                        labelColor={ Colors.white }
-                        style={ styleb1 } />
-          <RaisedButton
-                        label="Delete"
-                        backgroundColor={ Colors.red800 }
-                        labelColor={ Colors.white }
-                        style={ style } />
         </div>
         );
     } else {

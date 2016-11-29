@@ -24,6 +24,9 @@ var routes = (
              path="/app/all"
              component={ AllExpenses } />
       <Route
+             path="/app/:id"
+             component={ SaveExpenseEntry } />
+      <Route
              path="/app/new"
              component={ SaveExpenseEntry } />
     </Route>

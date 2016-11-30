@@ -28,6 +28,8 @@ export default class ShowAll extends React.Component {
     context.router
     this.state = {
       items: [],
+      ExpenseDataList: [],
+      userDetails: {},
       selectedExpenseIndex: null
     }
   }
@@ -53,7 +55,9 @@ export default class ShowAll extends React.Component {
     });
     console.log(itemsArray);
     this.setState({
-      items: itemsArray
+      items: itemsArray,
+      ExpenseDataList: this.props.ExpenseDataList,
+      userDetails: userDetails
     });
   }
   componentWillMount() {
@@ -72,7 +76,13 @@ export default class ShowAll extends React.Component {
   }
   handleButtonClick(e) {
     if (window.selectedIndex) {
-      this.context.router.push('/app/' + window.selectedIndex)
+      this.context.router.ExpenseDetails = this.state.ExpenseDataList[window.selectedIndex - 1]
+      this.context.router.push({
+        pathname: '/app/' + window.selectedIndex,
+        state: {
+          ExpenseDetails: this.state.items[window.selectedIndex - 1]
+        }
+      });
     }
     else return false;
   }

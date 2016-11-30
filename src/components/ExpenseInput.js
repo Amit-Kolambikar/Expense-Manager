@@ -26,80 +26,141 @@ const formStyle = {
 const descboxStyle = {
   width: '100%'
 }
-var expenseInput = React.createClass({
-  getInitialState: function() {
-    return {
+export default class expenseInput extends React.Component {
+  constructor(props, context) {
+    super(props);
+    context.router // will work
+    this.state = {
       currencyUnit: null,
       categoryValue: null
     }
-  },
-  fetchCurrencyUnit: function() {
+    if (!isNaN(parseInt(context.router.params.id))) {
+      this.state.amount_value = parseInt(context.router.ExpenseDetails.doc.amount_value);
+      this.state.desc = context.router.ExpenseDetails.doc.desc;
+    }
+  }
+  fetchCurrencyUnit() {
     ExpensesDatabase.get('UserDetails', function(err, doc) {
       return this.setState({
         currencyUnit: doc.currencyUnit.split(' ')[1]
       });
     }.bind(this));
-  },
-  componentDidMount: function() {
+  }
+  componentDidMount() {
     this.fetchCurrencyUnit();
-  },
-  handleForm: function(evt) {
+  }
+  handleForm(evt) {
     evt.preventDefault();
     let formElement = document.getElementById('expense-form');
     let formData = serializeForm(formElement, {
       hash: true
     });
+    if (!isNaN(parseInt(this.context.router.params.id))) {
+      formData.currentExpenseId = this.context.router.params.id
+    }
     this.validateForm(formData);
-  },
+  }
   validateForm(formData) {
     //todo add more validations
     if (this.state.categoryValue) {
       formData.categoryValue = this.state.categoryValue
-      this.props.handleForm(formData);
     }
-  },
-  recordSelectedValue: function(event, index, value) {
+    this.props.handleForm(formData);
+  }
+  recordSelectedValue(event, index, value) {
     this.state.categoryValue = value + "-" + event.target.innerHTML;
-  },
-  render: function() {
-    return (
-      <form
-            id="expense-form"
-            onSubmit={ this.handleForm }
-            style={ formStyle }>
-        <label>
-          { this.state.currencyUnit }
-        </label>
-        <TextField
-                   type="number"
-                   className="expense-input "
-                   floatingLabelText="Enter Amount"
-                   required
-                   style={ TextFieldStyle }
-                   name="amount_value" />
-        <ExpenseDatePicker/>
-        <CategorySelection
-                           recordSelectedValue={ this.recordSelectedValue }
-                           name="category_value" />
-        <div>
+  }
+  render() {
+    if (isNaN(parseInt(this.context.router.params.id))) {
+      return (
+        <form
+              id="expense-form"
+              onSubmit={ this.handleForm.bind(this) }
+              style={ formStyle }>
+          <label>
+            { this.state.currencyUnit }
+          </label>
           <TextField
-                     type="text"
-                     floatingLabelText="Description (Optional) "
-                     multiLine={ true }
-                     rows={ 3 }
-                     style={ descboxStyle }
-                     name="desc" />
-        </div>
-        <br/>
-        <br/>
-        <RaisedButton
-                      backgroundColor={ Colors.blue800 }
-                      label="Save Expense"
-                      labelColor={ Colors.white }
-                      style={ ButtonStyle }
-                      type="submit" />
-      </form>)
+                     type="number"
+                     className="expense-input "
+                     floatingLabelText="Enter Amount"
+                     required
+                     style={ TextFieldStyle }
+                     name="amount_value" />
+          <ExpenseDatePicker/>
+          <CategorySelection
+                             recordSelectedValue={ this.recordSelectedValue.bind(this) }
+                             name="category_value" />
+          <div>
+            <TextField
+                       type="text"
+                       floatingLabelText="Description (Optional) "
+                       multiLine={ true }
+                       rows={ 3 }
+                       style={ descboxStyle }
+                       name="desc" />
+          </div>
+          <br/>
+          <br/>
+          <RaisedButton
+                        backgroundColor={ Colors.blue800 }
+                        label="Save Expense"
+                        labelColor={ Colors.white }
+                        style={ ButtonStyle }
+                        type="submit" />
+        </form>)
+    } else {
+      // render edit expense
+      return (
+        <form
+              id="expense-form"
+              onSubmit={ this.handleForm.bind(this) }
+              style={ formStyle }>
+          <label>
+            { this.state.currencyUnit }
+          </label>
+          <TextField
+                     type="number"
+                     className="expense-input "
+                     floatingLabelText="Enter Amount"
+                     required
+                     style={ TextFieldStyle }
+                     name="amount_value"
+                     value={ this.state.amount_value }
+                     onChange={ (e) => this.setState({
+                                  amount_value: e.target.value
+                                }) } />
+          <ExpenseDatePicker value={ this.context.router.ExpenseDetails.doc.date } />
+          <CategorySelection
+                             recordSelectedValue={ this.recordSelectedValue.bind(this) }
+                             name="category_value"
+                             value={ parseInt(this.context.router.ExpenseDetails.doc.categoryValue.split('-')[0]) } />
+          <div>
+            <TextField
+                       type="text"
+                       floatingLabelText="Description (Optional) "
+                       multiLine={ true }
+                       rows={ 3 }
+                       style={ descboxStyle }
+                       name="desc"
+                       value={ this.state.desc }
+                       onChange={ (e) => this.setState({
+                                    desc: e.target.value
+                                  }) } />
+          </div>
+          <br/>
+          <br/>
+          <RaisedButton
+                        backgroundColor={ Colors.blue800 }
+                        label="Save Expense"
+                        labelColor={ Colors.white }
+                        style={ ButtonStyle }
+                        type="submit" />
+        </form>)
+    }
 
   }
-});
-export default expenseInput;
+}
+expenseInput.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};

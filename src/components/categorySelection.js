@@ -9,10 +9,17 @@ import MenuItem from 'material-ui/MenuItem';
  */
 // categoryList will be fetched from db - enhancement - todo
 export default class categorySelection extends Component {
-  state = {
-    value: null,
-    categoryList: null,
-    MenuItem: null
+  constructor(props, context) {
+    super(props);
+    context.router // will work
+    this.state = {
+      value: null,
+      categoryList: null,
+      MenuItem: null
+    }
+    if (this.props.value) {
+      this.state.value = this.props.value;
+    }
   }
   fetchExpenseCategoryList() {
     // ExpensesDatabase.get('categoryListDatabase', function(err, doc) {

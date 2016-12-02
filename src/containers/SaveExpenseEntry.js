@@ -19,16 +19,14 @@ export default class SaveExpenseEntry extends React.Component {
     data.date = data.date + ""
     this.formData = data;
     ExpensesDatabase.get('UserDetails').then(function(doc, data) {
-      if (this.formData.hasOwnProperty('currentExpenseId')) {
-        this.currentExpenseId = this.formData.currentExpenseId
-      } else {
-        this.currentExpenseId = doc.currentExpenseId
+      if (!this.formData.hasOwnProperty('currentExpenseId')) {
+        this.formData.currentExpenseId = doc.currentExpenseId
       }
     }.bind(this)).then(function(response, data) {
       // handle response
       // this.RenderApp
       // edit expense entry put
-      ExpensesDatabase.get('ExpenseInput' + this.currentExpenseId).then(function(doc) {
+      ExpensesDatabase.get('ExpenseInput' + this.formData.currentExpenseId).then(function(doc) {
         if (!this.formData.hasOwnProperty('categoryValue')) {
           this.formData.categoryValue = doc.categoryValue;
         }

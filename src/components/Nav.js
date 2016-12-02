@@ -43,7 +43,7 @@ const Nav = () => (
       <MenuItem
                 primaryText="Download"
                 leftIcon={ <Download /> }
-                containerElement={ <Link to='/app/new' /> } />
+                containerElement={ <Link to='/app/all#download' /> } />
       <MenuItem
                 primaryText="View Chart"
                 leftIcon={ <ShowChart /> }

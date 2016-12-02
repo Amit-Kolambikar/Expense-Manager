@@ -3,6 +3,7 @@ import ShowAll from '../components/ShowAll'
 var PouchDB = require('pouchdb-browser');
 window.PouchDB = PouchDB;
 var remoteCouch = false;
+var doc = new window.jsPDF();
 
 export default class AllExpenses extends React.Component {
 
@@ -22,6 +23,13 @@ export default class AllExpenses extends React.Component {
       this.setState({
         ExpenseDataList: result.rows
       });
+      if (this.props.location.hash) {
+
+        doc.text((result.rows.map(function(i) {
+          return JSON.stringify(i.doc)
+        })).toString());
+        doc.save('expenses.pdf')
+      }
     }.bind(this)).catch(function(err) {
       console.log(err);
     });

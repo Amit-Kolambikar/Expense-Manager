@@ -4,6 +4,8 @@ var Router = ReactRouter.Router;
 var Route = ReactRouter.Route;
 var hashHistory = ReactRouter.hashHistory;
 var IndexRoute = ReactRouter.IndexRoute;
+var BrowserRouter = ReactRouter.BrowserRouter;
+var browserHistory = ReactRouter.browserHistory;
 import UserDetails from '../containers/UserDetails'
 import App from '../components/App'
 import SaveExpenseEntry from '../containers/SaveExpenseEntry'
@@ -11,7 +13,7 @@ import AllExpenses from '../containers/AllExpenses'
 import Main from '../components/Main'
 var Nav = require('../components/Nav');
 var routes = (
-<Router history={ hashHistory }>
+<Router history={ browserHistory }>
   <Route
          path="/"
          component={ Main }>

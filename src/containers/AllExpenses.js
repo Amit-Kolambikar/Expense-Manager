@@ -23,8 +23,7 @@ export default class AllExpenses extends React.Component {
       this.setState({
         ExpenseDataList: result.rows
       });
-      if (this.props.location.hash) {
-
+      if (this.context.router.location.hash) {
         doc.text((result.rows.map(function(i) {
           return JSON.stringify(i.doc)
         })).toString());

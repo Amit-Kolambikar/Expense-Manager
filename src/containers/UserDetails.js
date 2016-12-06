@@ -12,7 +12,7 @@ export default class UserDetails extends React.Component {
     context.router // will work
   }
   clickHandler(e) {
-    this.context.router.push('/app')
+    this.context.router.push('/app/new')
   }
   handleDropdownChange(value) {
     ExpensesDatabase.get('UserDetails').then(function(doc) {

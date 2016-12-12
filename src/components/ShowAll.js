@@ -1,6 +1,9 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as Colors from 'material-ui/styles/colors';
+var PouchDB = require('pouchdb-browser');
+window.PouchDB = PouchDB;
+var ExpensesDatabase = PouchDB('ExpensesDatabase');
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 const TableCustomStyle = {
   marginTop: 20
@@ -74,17 +77,38 @@ export default class ShowAll extends React.Component {
       window.selectedIndex = null;
     }
   }
-  handleButtonClick(e) {
+  handleButtonClick(e, type) {
     if (window.selectedIndex) {
-      this.context.router.ExpenseDetails = this.state.ExpenseDataList[window.selectedIndex - 1]
-      this.context.router.push({
-        pathname: '/app/' + window.selectedIndex,
-        state: {
-          ExpenseDetails: this.state.items[window.selectedIndex - 1]
-        }
+      this.setState({
+        selectedExpenseIndex: window.selectedIndex
       });
+      if (type == "delete") {
+        ExpensesDatabase.get('ExpenseInput' + window.selectedIndex).then(function(doc) {
+          return ExpensesDatabase.remove(doc);
+        }).then(function(result) {
+          return this.setState({
+            selectedExpenseIndex: null
+          });
+        }).catch(function(err) {
+          return false;
+        });
+      } else {
+        this.context.router.ExpenseDetails = this.state.ExpenseDataList[window.selectedIndex - 1]
+        this.context.router.actionType = type
+        this.context.router.push({
+          pathname: '/app/' + window.selectedIndex,
+          state: {
+            ExpenseDetails: this.state.items[window.selectedIndex - 1]
+          }
+        });
+        return this.setState({
+          selectedExpenseIndex: null
+        });
+      }
     }
-    else return false;
+    else return this.setState({
+        selectedExpenseIndex: null
+      });
   }
   render() {
     return (
@@ -118,13 +142,13 @@ export default class ShowAll extends React.Component {
                       backgroundColor={ Colors.blue800 }
                       labelColor={ Colors.white }
                       style={ styleb1 }
-                      onClick={ this.handleButtonClick.bind(this) } />
+                      onClick={ (event) => this.handleButtonClick(event, "edit") } />
         <RaisedButton
                       label="Delete"
                       backgroundColor={ Colors.red800 }
                       labelColor={ Colors.white }
                       style={ style }
-                      onClick={ this.handleButtonClick.bind(this) } />
+                      onClick={ (event) => this.handleButtonClick(event, "delete") } />
       </div>
       );
   }

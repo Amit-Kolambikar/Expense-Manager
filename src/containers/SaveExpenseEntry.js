@@ -21,6 +21,9 @@ export default class SaveExpenseEntry extends React.Component {
     ExpensesDatabase.get('UserDetails').then(function(doc, data) {
       if (!this.formData.hasOwnProperty('currentExpenseId')) {
         this.formData.currentExpenseId = doc.currentExpenseId
+        this.formData.newEntry = true;
+      } else {
+        this.formData.newEntry = false;
       }
     }.bind(this)).then(function(response, data) {
       // handle response
@@ -48,7 +51,7 @@ export default class SaveExpenseEntry extends React.Component {
         if (err.status == 404) {
           // new expense entry put
           ExpensesDatabase.put({
-            _id: 'ExpenseInput' + this.currentExpenseId,
+            _id: 'ExpenseInput' + this.formData.currentExpenseId,
             'date': this.formData['date'],
             'desc': this.formData['desc'],
             'categoryValue': this.formData['categoryValue'],
@@ -56,17 +59,18 @@ export default class SaveExpenseEntry extends React.Component {
           });
           // handle response
           // this.RenderApp
-          this.clearForm();
-          this.currentExpenseId = this.currentExpenseId + 1;
+          this.formData.currentExpenseId = this.formData.currentExpenseId + 1;
           ExpensesDatabase.get('UserDetails').then(function(doc) {
-            return ExpensesDatabase.put({
+            ExpensesDatabase.put({
               _id: 'UserDetails',
               _rev: doc._rev,
               currencyUnit: doc.currencyUnit,
-              currentExpenseId: this.currentExpenseId
+              currentExpenseId: this.formData.currentExpenseId
             });
+
+            this.clearForm();
+            this.showAllExpenses();
           }.bind(this));
-          this.showAllExpenses();
 
         }
       }.bind(this));
@@ -78,6 +82,7 @@ export default class SaveExpenseEntry extends React.Component {
     document.querySelectorAll('[name=date]')[0].value = "";
   }
   showAllExpenses() {
+    this.formData = {};
     this.context.router.push('/app/all')
   }
   render() {
